@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const controllers = require('/Users/andrewliu/Overview-Service-/Database/Postgres/Controllers/controllers.js')
+const controllers = require('./Controllers/controllers.js')
 
 //add product id in the url 
 

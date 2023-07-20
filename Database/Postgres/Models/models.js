@@ -49,10 +49,11 @@ exports.findByProductID = async (productID) => {
         const firstFeature = featuresResult.rows[0]
         const secondFeature = featuresResult.rows[1]
 
-        productsResult.rows[0]['features'] = 
-        [{"feature" : firstFeature.feature, "value": firstFeature.value}, 
-        {"feature" : secondFeature.feature, "value" : secondFeature.value}]
+        console.log(firstFeature)
 
+        productsResult.rows[0]['features'] = 
+        [{"feature" : firstFeature['feature'], "value": firstFeature.value}, 
+        {"feature" : secondFeature['feature'], "value" : secondFeature.value}]
         return {
             products: productsResult.rows,
             // characteristics: characteristicsResult.rows,
