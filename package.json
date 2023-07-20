@@ -4,10 +4,11 @@
   "description": "",
   "main": "Query.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "k6 run Database/Postgres/APItesting/API_testing.js",
     "start": "nodemon Database/Postgres/index.js",
     "db": "node Database/Postgres/db.js",
     "copy": "node Database/Postgres/seed.js"
+  
   },
   "keywords": [],
   "author": "",

@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use('/', router);
 
-const port = 4000
+const port = process.env.SERVER_PORT || 3001
 app.set('port', port);
 
 app.listen(port, function () {

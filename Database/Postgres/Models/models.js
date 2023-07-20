@@ -1,7 +1,11 @@
 const db = require('../db.js')
 
 exports.findAllProducts = async (page, count) => {
-    console.log("made it to models: ", page, count)
+    console.log("made it to findAllProducts model: ", page, count)
+
+    page = page || 1;
+    count = count || 20;
+
     if(page === 1) {
         var startCount = 1;
         var endCount = count; 
@@ -11,8 +15,9 @@ exports.findAllProducts = async (page, count) => {
     }
     try{
         var params = [startCount, endCount]
-        const productsQuery =  `SELECT * FROM products WHERE id BETWEEN $1 AND $2`
+        const productsQuery =  `SELECT * FROM products WHERE id BETWEEN $1 AND $2`;
         const productsResult = await db.query(productsQuery, params);
+        console.log(productsResult)
         return {
             products: productsResult.rows
         } 
@@ -25,13 +30,13 @@ exports.findAllProducts = async (page, count) => {
 } 
 
 exports.findByProductID = async (productID) => {
+    productID = productID || 12342
     console.log("made it to models: ", productID);
     var params = [productID]
     try {
         const productsQuery = `SELECT * FROM products WHERE id = $1`;
         const featuresQuery = `SELECT * FROM features WHERE product_id = $1`;
-        const reviewsQuery = `SELECT rating FROM reviews WHERE product_id = $1`;
-
+        // const reviewsQuery = `SELECT rating FROM reviews WHERE product_id = $1`; 
         // const characteristicsQuery = `SELECT * FROM characteristics WHERE product_id = $1`;
         // const stylesQuery = `SELECT * FROM styles WHERE productId = $1`;
 
