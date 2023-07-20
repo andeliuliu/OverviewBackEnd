@@ -8,7 +8,6 @@ exports.getAllProducts = async (req, res) => {
 
     try {
         const results = await models.findAllProducts(page, count);
-        console.log(results);
         res.send(results);
     } catch (err) {
         console.error(err);
@@ -19,7 +18,6 @@ exports.getProductById = async (req, res) => {
 
     try {
         const results = await models.findByProductID(req.body.productID);
-        console.log(results);
         res.send(results);
     } catch (err) {
         console.error(err);
@@ -31,7 +29,6 @@ exports.getStylesById = async (req, res) => {
 
     try {
         const results = await models.StyleByProductId(req.body.productID);
-        console.log(results);
         res.send(results);
     } catch (err) {
         console.error(err);
@@ -44,7 +41,6 @@ exports.addCart = async (req, res) => {
 
     try {
         const results = await models.addCart(user_session, product_id, active);
-        console.log(results);
         res.send(results);
     } catch (err) {
         console.error(err);
@@ -56,7 +52,6 @@ exports.getCart = async(req, res) => {
 
     try {
         const results = await models.getCart();
-        console.log(results);
         res.send(results);
     } catch (err) {
         console.error(err);
