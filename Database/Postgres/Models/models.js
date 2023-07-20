@@ -17,7 +17,6 @@ exports.findAllProducts = async (page, count) => {
         var params = [startCount, endCount]
         const productsQuery =  `SELECT * FROM products WHERE id BETWEEN $1 AND $2`;
         const productsResult = await db.query(productsQuery, params);
-        console.log(productsResult)
         return {
             products: productsResult.rows
         } 
@@ -72,7 +71,7 @@ exports.StyleByProductId = async (productID) => {
     try {
       const stylesQuery = `SELECT * FROM styles WHERE productId = $1`;
       const stylesResult = await db.query(stylesQuery, params);
-      console.log(stylesResult.rows);
+      // console.log(stylesResult.rows);
   
       for (const style of stylesResult.rows) {
         delete style.productid;
