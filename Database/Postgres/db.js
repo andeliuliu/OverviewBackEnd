@@ -13,16 +13,20 @@
 //reviews:            id,
 
 // cart:              id, user_session, product_id, active
+//PG_USER = postgres
+
+
 const {Client} = require('pg')
 const dotenv = require('dotenv');
 dotenv.config();
+
 
 const db = new Client({
   host: process.env.PG_HOST,
   port: process.env.PG_PORT,
   user: process.env.PG_USER,
-  password: process.env.PG_PASSWORD,
-  database: process.env.PG_NAME
+  password: process.env.PG_PASS,
+  database: process.env.PG_DB
 });
  
 db.connect();

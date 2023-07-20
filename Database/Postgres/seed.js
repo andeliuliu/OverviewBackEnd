@@ -2,10 +2,10 @@ const db = require('./db.js');
 require("dotenv").config();
 
 db.connect()
- .then(() => {
+    .then(() => {
         console.log("database connected")
     })
-    .catch(() => {
+    .catch((err) => {
         console.error("database not connected: ", err)
     })
     .then(() => {
@@ -25,6 +25,12 @@ db.connect()
     })
     .catch((err) => {
         console.error('Error creating products table', err);
+    })
+    .then(() => {
+        return db.query(`CREATE INDEX idx_products_id ON products(id);`)
+    })
+    .catch((err) => {
+        console.error('failed to create index: ', err)
     })
     .then(() => {
         db.query(`COPY products FROM '${process.env.PRODUCT}' DELIMITER ',' CSV HEADER;`)
@@ -48,6 +54,13 @@ db.connect()
     })
     .catch((err) => {
         console.error('Error creating characteristics table', err)
+    })
+    .then(() => {
+        return db.query(`CREATE INDEX idx_characteristics_product_id ON characteristics (product_id);
+        `)
+    })
+    .catch((err) => {
+        console.error('failed to create index: ', err)
     })
     .then(() => {
         console.log("copied characteristics table successfully")
@@ -74,6 +87,12 @@ db.connect()
     })
     .catch((err) => {
         console.error('Error creating features table', err)
+    })
+    .then(() => {
+        return db.query(`CREATE INDEX idx_features_product_id ON features (product_id);`)
+    })
+    .catch((err) => {
+        console.error('failed to create index: ', err)
     })
     .then(() => {
         console.log("copied features table successfully")
@@ -104,6 +123,12 @@ db.connect()
         console.error('Error creating styles table', err)
     })
     .then(() => {
+        return db.query(`CREATE INDEX idx_styles_product_id ON styles (productId);`)
+    })
+    .catch((err) => {
+        console.error('failed to create index: ', err)
+    })
+    .then(() => {
         console.log("copied styles table successfully")
         return db.query(`
             COPY styles FROM '${process.env.STYLES}' DELIMITER ',' CSV HEADER;
@@ -130,6 +155,12 @@ db.connect()
         console.error('Error creating photos table', err)
     })
     .then(() => {
+        return db.query(`CREATE INDEX idx_photos_styles_id ON photos (style_id);`)
+    })
+    .catch((err) => {
+        console.error('failed to create index: ', err)
+    })
+    .then(() => {
         console.log("copied photos table successfully")
         return db.query(`
             COPY photos FROM '${process.env.PHOTOS}' DELIMITER ',' CSV HEADER;
@@ -154,6 +185,12 @@ db.connect()
     })
     .catch((err) => {
         console.error('Error creating skus table', err)
+    })
+    .then(() => {
+        return db.query(`CREATE INDEX idx_skus_styles_id ON skus (style_id);`)
+    })
+    .catch((err) => {
+        console.error('failed to create index: ', err)
     })
     .then(() => {
         console.log("copied skus table successfully")
@@ -191,6 +228,12 @@ db.connect()
         console.error('Error creating reviews table', err)
     })
     .then(() => {
+        return db.query(`CREATE INDEX idx_reviews_product_id ON reviews (product_id);`)
+    })
+    .catch((err) => {
+        console.error('failed to create index: ', err)
+    })
+    .then(() => {
         console.log("copied reviews table successfully")
         return db.query(`
             COPY reviews FROM '${process.env.REVIEWS}' DELIMITER ',' CSV HEADER;
@@ -215,6 +258,12 @@ db.connect()
     })
     .catch((err) => {
         console.error('Error creating cart table', err)
+    })
+    .then(() => {
+        return db.query(`CREATE INDEX idx_cart_product_id ON cart (product_id);`)
+    })
+    .catch((err) => {
+        console.error('failed to create index: ', err)
     })
     .then(() => {
         console.log("copied cart table successfully")
