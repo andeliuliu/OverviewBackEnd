@@ -16,12 +16,12 @@
 //PG_USER = postgres
 
 
-const {Client} = require('pg')
+const {Pool} = require('pg')
 const dotenv = require('dotenv');
 dotenv.config();
 
 
-const db = new Client({
+const db = new Pool({
   host: process.env.PG_HOST,
   port: process.env.PG_PORT,
   user: process.env.PG_USER,
